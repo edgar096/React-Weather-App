@@ -29,7 +29,12 @@ function App() {
         ></input>
         <input type="button" value="Submit"></input>
       </form>
-      <div>{data.name}</div>
+      <ul>
+        <li>{data.name}</li>
+        <li>{data.main.temp_max}</li>
+        <li>{data.main.temp}</li>
+        <li>{data.main.feels_like}</li>
+      </ul>
     </>
   );
 }
