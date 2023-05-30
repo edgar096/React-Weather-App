@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import './App.css';
+import 'leaflet/dist/leaflet.css';
 
 function App() {
+  const position = [51.505, -0.09];
   const [data, setData] = useState({});
   const [location, setLocation] = useState(null);
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=06a0ddef3e13e908cd7e8f750a12cd78`;
@@ -20,6 +23,17 @@ function App() {
   };
   return (
     <>
+      <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={position}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
       <form action="submit" onSubmit={handleSubmitLocation}>
         <input
           type="text"
@@ -28,6 +42,7 @@ function App() {
         ></input>
         <input type="button" value="Submit"></input>
       </form>
+
       {data.coord && (
         <ul>
           <li>Location:{data.name}</li>
