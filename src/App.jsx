@@ -23,17 +23,6 @@ function App() {
   };
   return (
     <>
-      <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </MapContainer>
       <form action="submit" onSubmit={handleSubmitLocation}>
         <input
           type="text"
@@ -44,16 +33,34 @@ function App() {
       </form>
 
       {data.coord && (
-        <ul>
-          <li>Location:{data.name}</li>
-          <li>Temperature: {Math.round(data.main.temp - 273.15)}ºC</li>
-          <li>Feels Like: {Math.round(data.main.feels_like - 273.15)}ºC</li>
-          <li>
-            Minimum: {Math.round(data.main.temp_min - 273.15)}ºC //Maximum:
-            {Math.round(data.main.temp_max - 273.15)}ºC{' '}
-          </li>
-          <li>Current Humidity: {data.main.humidity}%</li>
-        </ul>
+        <>
+          <MapContainer
+            center={[data.coord.lat, data.coord.lon]}
+            zoom={13}
+            scrollWheelZoom={false}
+            style={{ width: '100%', height: 'calc(100vh - 4rem)' }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[data.coord.lat, data.coord.lon]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>
+          <ul>
+            <li>Location:{data.name}</li>
+            <li>Temperature: {Math.round(data.main.temp - 273.15)}ºC</li>
+            <li>Feels Like: {Math.round(data.main.feels_like - 273.15)}ºC</li>
+            <li>
+              Minimum: {Math.round(data.main.temp_min - 273.15)}ºC //Maximum:
+              {Math.round(data.main.temp_max - 273.15)}ºC{' '}
+            </li>
+            <li>Current Humidity: {data.main.humidity}%</li>
+          </ul>
+        </>
       )}
     </>
   );
