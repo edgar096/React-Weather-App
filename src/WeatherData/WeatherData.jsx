@@ -1,7 +1,6 @@
 const WeatherData = ({ data }) => {
   return (
     <ul>
-      <li>Location:{data.name}</li>
       <li>Temperature: {Math.round(data.main.temp - 273.15)}ºC</li>
       <li>Feels Like: {Math.round(data.main.feels_like - 273.15)}ºC</li>
       <li>
