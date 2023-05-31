@@ -4,6 +4,8 @@ import './App.css';
 import 'leaflet/dist/leaflet.css';
 import WeatherData from './WeatherData/WeatherData';
 import MapWidget from './Map/MapWidget';
+import { MantineProvider } from '@mantine/core';
+import LocationForm from './UI/Form/LocationForm';
 
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -30,24 +32,18 @@ function App() {
   };
   console.log(import.meta.env.VITE_API_KEY);
   return (
-    <>
-      <h1>Location:{data.name}</h1>
-      <form action="submit" onSubmit={handleSubmitLocation}>
-        <input
-          type="text"
-          placeholder="Enter a location"
-          name="locationSubmit"
-        ></input>
-        <input type="button" value="Submit"></input>
-      </form>
-
-      {data.coord && (
-        <>
-          <MapWidget data={data} />
-          <WeatherData data={data} />
-        </>
-      )}
-    </>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <>
+        <h1>Location:{data.name}</h1>
+        <LocationForm handler={handleSubmitLocation} />
+        {data.coord && (
+          <>
+            <MapWidget data={data} />
+            <WeatherData data={data} />
+          </>
+        )}
+      </>
+    </MantineProvider>
   );
 }
 
