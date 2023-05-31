@@ -1,6 +1,11 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  MinimapControl,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Container } from '@mantine/core';
 
 const MapWidget = ({ data }) => {
   let position = [data.coord.lat, data.coord.lon];
@@ -16,6 +21,7 @@ const MapWidget = ({ data }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={position}></Marker>
+      <MinimapControl position="topright" />
     </MapContainer>
   );
 };
