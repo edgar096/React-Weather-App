@@ -4,7 +4,7 @@ import './App.css';
 import 'leaflet/dist/leaflet.css';
 import WeatherData from './WeatherData/WeatherData';
 import MapWidget from './Map/MapWidget';
-import { MantineProvider } from '@mantine/core';
+import { Grid, MantineProvider } from '@mantine/core';
 import LocationForm from './UI/Form/LocationForm';
 
 function App() {
@@ -34,15 +34,25 @@ function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <>
-        <h1>Location:{data.name}</h1>
-        <LocationForm handler={handleSubmitLocation} />
-        {data.coord && (
-          <>
-            <MapWidget data={data} />
-            <WeatherData data={data} />
-          </>
-        )}
+        <Grid>
+          <Grid.Col span={12}>
+            <h1>Location:{data.name}</h1>
+          </Grid.Col>
+
+          <Grid.Col span={12}>
+            <LocationForm handler={handleSubmitLocation} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            {data.coord && (
+              <>
+                <MapWidget data={data} />
+                <WeatherData data={data} />
+              </>
+            )}
+          </Grid.Col>
+        </Grid>
       </>
+
     </MantineProvider>
   );
 }

@@ -3,15 +3,19 @@ const LocationForm = ({ handler }) => {
   return (
     <form action="submit" onSubmit={handler}>
       <Grid>
-        <Input
-          placeholder="Enter a location"
-          name="locationSubmit"
-          radius="xs"
-          size="xl"
-        ></Input>
-        <Button type="submit" value="Submit" size="l" compact>
-          Submit
-        </Button>
+        <Grid.Col span={8}>
+          <Input
+            placeholder="Enter a location"
+            name="locationSubmit"
+            radius="xs"
+            size="xl"
+          ></Input>
+        </Grid.Col>
+        <Grid.Col span={4}>
+          <Button type="submit" value="Submit" size="xl">
+            Submit
+          </Button>
+        </Grid.Col>
       </Grid>
     </form>
   );

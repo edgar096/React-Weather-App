@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { Container } from '@mantine/core';
 
 const MapWidget = ({ data }) => {
   let position = [data.coord.lat, data.coord.lon];
