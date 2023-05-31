@@ -44,8 +44,8 @@ function App() {
           <Grid.Col span={12}>
             {data.coord && (
               <>
-                <MapWidget data={data} />
                 <WeatherData data={data} />
+                <MapWidget data={data} />
               </>
             )}
           </Grid.Col>
