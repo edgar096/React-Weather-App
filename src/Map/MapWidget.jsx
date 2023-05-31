@@ -1,9 +1,11 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import AutoMapRecenter from '../Map/AutoMapRecenter';
+import { useEffect } from 'react';
 
 const MapWidget = ({ data }) => {
   let position = [data.coord.lat, data.coord.lon];
+
   return (
     <MapContainer
       center={position}
