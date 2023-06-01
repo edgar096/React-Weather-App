@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
 import WeatherData from './WeatherData/WeatherData';
@@ -12,18 +11,27 @@ function App() {
 
   const [data, setData] = useState({});
   const [location, setLocation] = useState(null);
-  //const [position, setPosition] = useState([]);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
 
   useEffect(() => {
-    if (location != null) {
-      fetch(url)
-        .then((response) => response.json())
-        .then((response) => {
-          setData(response);
-        });
+    try {
+      if (location != null) {
+        fetch(url)
+          .then((response) => response.json())
+          .then((response) => setData(response));
+      }
+    } catch (err) {
+      console.log(err);
     }
+
+    // if (location != null) {
+    //   fetch(url)
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //       setData(response);
+    //     });
+    // }
   }, [location]);
 
   const handleSubmitLocation = (e) => {
@@ -35,7 +43,7 @@ function App() {
       <>
         <Grid>
           <Grid.Col span={12}>
-            <h1>Location:{data.name}</h1>
+            {data.name && <h1>Location:{data.name}</h1>}
           </Grid.Col>
 
           <Grid.Col span={12}>
