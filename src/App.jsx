@@ -14,7 +14,7 @@ function App() {
   const [location, setLocation] = useState(null);
   //const [position, setPosition] = useState([]);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
 
   useEffect(() => {
     if (location != null) {

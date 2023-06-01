@@ -1,28 +1,37 @@
-import { Grid } from '@mantine/core';
+import { Grid, SimpleGrid } from '@mantine/core';
 
 const WeatherData = ({ data }) => {
   return (
     <>
-      <Grid gutter={5} gutterXs="md" gutterMd="xl" gutterXl={50}>
+      <SimpleGrid cols={2} spacing="xl">
+        <span>Temperature: {Math.round(data.main.temp)}ºC</span>
+        <span>Feels Like: {Math.round(data.main.feels_like)}ºC</span>
+        <SimpleGrid cols={3} spacing="xl">
+          <span>Minimum: {Math.round(data.main.temp_min)}ºC</span>
+          <span>Maximum:{Math.round(data.main.temp_max)}ºC</span>
+        </SimpleGrid>
+        <span> Current Humidity: {data.main.humidity}%</span>
+      </SimpleGrid>
+      {/* <Grid gutter={5} gutterXs="md" gutterMd="xl" gutterXl={50}>
         <Grid.Col span={6}>
-          Temperature: {Math.round(data.main.temp - 273.15)}ºC
+          Temperature: {Math.round(data.main.temp)}ºC
         </Grid.Col>
         <Grid.Col span={6}>
-          Feels Like: {Math.round(data.main.feels_like - 273.15)}ºC
+          Feels Like: {Math.round(data.main.feels_like)}ºC
         </Grid.Col>
         <Grid.Col span={6}>
           <Grid gutter={5} gutterXs="md" gutterMd="xl" gutterXl={50}>
             <Grid.Col span={6}>
-              Minimum: {Math.round(data.main.temp_min - 273.15)}ºC
+              Minimum: {Math.round(data.main.temp_min)}ºC
             </Grid.Col>
             <Grid.Col span={6}>
               Maximum:
-              {Math.round(data.main.temp_max - 273.15)}ºC
+              {Math.round(data.main.temp_max)}ºC
             </Grid.Col>
           </Grid>
         </Grid.Col>
         <Grid.Col span={6}>Current Humidity: {data.main.humidity}%</Grid.Col>
-      </Grid>
+      </Grid> */}
     </>
   );
 };
