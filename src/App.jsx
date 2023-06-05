@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
 import WeatherData from './WeatherData/WeatherData';
@@ -10,33 +10,43 @@ function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const [data, setData] = useState({});
-  const [location, setLocation] = useState(null);
+  // const [location, setLocation] = useState(null);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
-
-  useEffect(() => {
+  async function getData(location) {
     try {
-      if (location != null) {
-        fetch(url)
-          .then((response) => response.json())
-          .then((response) => setData(response));
-      }
-    } catch (err) {
-      console.log(err);
-    }
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
 
-    // if (location != null) {
-    //   fetch(url)
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //       setData(response);
-    //     });
-    // }
-  }, [location]);
+      let response = await fetch(url);
+      if (response.status == 404) {
+        throw new Error('isabndusa');
+      }
+      let urlData = await response.json();
+      setData(urlData);
+    } catch (error) {
+      console.log('eroewqeqwr', error);
+    }
+  }
+
+  // useEffect(() => {
+  //   try {
+  //     getData(url);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   // try {
+  //   //   if (location !== null) {
+  //   //     fetch(url)
+  //   //       .then((response) => response.json())
+  //   //       .then((response) => setData(response));
+  //   //   }
+  //   // } catch (error) {
+  //   //   console.log(error);
+  //   // }
+  // }, [url, location]);
 
   const handleSubmitLocation = (e) => {
     e.preventDefault();
-    setLocation(e.target.locationSubmit.value);
+    getData(e.target.locationSubmit.value);
   };
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
