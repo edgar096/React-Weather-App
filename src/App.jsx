@@ -5,7 +5,8 @@ import WeatherData from './WeatherData/WeatherData';
 import MapWidget from './Map/MapWidget';
 import { Grid, MantineProvider } from '@mantine/core';
 import LocationForm from './UI/Form/LocationForm';
-import ErrorBoundary from './UI/ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './UI/ErrorFallback/ErrorFallback';
 
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -35,28 +36,26 @@ function App() {
   };
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <>
-        <Grid>
-          <Grid.Col span={12}>
-            {data.name && <h1>Location:{data.name}</h1>}
-          </Grid.Col>
+      <Grid>
+        <LocationForm handler={handleSubmitLocation} />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {data.coord && (
+            <>
+              <h1>Location:{data.name}</h1>
+              <WeatherData data={data} />
+              <MapWidget data={data} />
+            </>
+          )}
+        </ErrorBoundary>
+        {/* {data.name && }
 
-          <Grid.Col span={12}>
-            <LocationForm handler={handleSubmitLocation} />
-          </Grid.Col>
-          <Grid.Col span={12}>
-            <ErrorBoundary fallback={<h1>ERROR</h1>}>
-              {data.coord && (
-                <>
-                  <WeatherData data={data} />
-
-                  <MapWidget data={data} />
-                </>
-              )}
-            </ErrorBoundary>
-          </Grid.Col>
-        </Grid>
-      </>
+        {data.coord && (
+          <>
+            <WeatherData data={data} />
+            <MapWidget data={data} />
+          </>
+        )} */}
+      </Grid>
     </MantineProvider>
   );
 }
