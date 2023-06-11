@@ -5,7 +5,6 @@ import WeatherData from './WeatherData/WeatherData';
 import MapWidget from './Map/MapWidget';
 import { Grid, MantineProvider } from '@mantine/core';
 import LocationForm from './UI/Form/LocationForm';
-import { ErrorBoundary } from 'react-error-boundary';
 import ErrorBoundary from './UI/ErrorBoundary/ErrorBoundary';
 
 function App() {
