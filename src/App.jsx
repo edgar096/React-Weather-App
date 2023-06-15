@@ -40,7 +40,7 @@ function App() {
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <>
         <LocationForm handler={handleSubmitLocation} />
-        <ErrorBoundary fallback={<h1>error</h1>}>
+        <ErrorBoundary fallback={<h1>error</h1>} key={data.cod}>
           {data.cod && (
             <>
               <h1>Location:{data.name}</h1>
