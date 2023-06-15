@@ -27,7 +27,7 @@ function App() {
     } catch (error) {
       //console.log(error);
       // setError(error);
-      throw error;
+      throw new Error('Bad API Response');
     }
   }
 
