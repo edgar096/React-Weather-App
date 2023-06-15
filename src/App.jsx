@@ -36,15 +36,15 @@ function App() {
   return (
     <>
       <LocationForm handler={handleSubmitLocation} />
-      {data.cod && (
-        <ErrorBoundary fallback={<h1>test</h1>}>
+      <ErrorBoundary fallback={<h1>test</h1>}>
+        {data.cod && (
           <>
-            <h1>Location:{error ? 'error in location' : data.name}</h1>
+            <h1>Location:{data.name}</h1>
             <WeatherData data={data} />
             <MapWidget data={data} />
           </>
-        </ErrorBoundary>
-      )}
+        )}
+      </ErrorBoundary>
     </>
   );
 }
