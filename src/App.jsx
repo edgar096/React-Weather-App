@@ -38,23 +38,13 @@ function App() {
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <Grid>
         <LocationForm handler={handleSubmitLocation} />
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          {data.coord && (
-            <>
-              <h1>Location:{data.name}</h1>
-              <WeatherData data={data} />
-              <MapWidget data={data} />
-            </>
-          )}
-        </ErrorBoundary>
-        {/* {data.name && }
-
-        {data.coord && (
+        {data.cod && (
           <>
+            <h1>Location:{data.name}</h1>
             <WeatherData data={data} />
             <MapWidget data={data} />
           </>
-        )} */}
+        )}
       </Grid>
     </MantineProvider>
   );
