@@ -12,7 +12,7 @@ function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const [data, setData] = useState({});
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   async function getData(location) {
     try {
@@ -24,11 +24,10 @@ function App() {
       // }
       let urlData = await response.json();
       setData(urlData);
-      console.log(response);
     } catch (error) {
       //console.log(error);
-      setError(error);
-      // throw error;
+      // setError(error);
+      throw error;
     }
   }
 
