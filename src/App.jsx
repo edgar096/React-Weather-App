@@ -5,8 +5,7 @@ import WeatherData from './WeatherData/WeatherData';
 import MapWidget from './Map/MapWidget';
 import { Grid, MantineProvider } from '@mantine/core';
 import LocationForm from './UI/Form/LocationForm';
-import { ErrorBoundary } from 'react-error-boundary';
-import ErrorFallback from './UI/ErrorFallback/ErrorFallback';
+import ErrorBoundary from './UI/ErrorBoundary/ErrorBoundary';
 
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -35,18 +34,18 @@ function App() {
     getData(e.target.locationSubmit.value);
   };
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Grid>
-        <LocationForm handler={handleSubmitLocation} />
-        {data.cod && (
+    <>
+      <LocationForm handler={handleSubmitLocation} />
+      {data.cod && (
+        <ErrorBoundary fallback={<h1>test</h1>}>
           <>
-            <h1>Location:{data.name}</h1>
+            <h1>Location:{error ? 'error in location' : data.name}</h1>
             <WeatherData data={data} />
             <MapWidget data={data} />
           </>
-        )}
-      </Grid>
-    </MantineProvider>
+        </ErrorBoundary>
+      )}
+    </>
   );
 }
 
