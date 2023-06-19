@@ -1,5 +1,5 @@
-import { Grid, SimpleGrid } from '@mantine/core';
-
+import { Grid } from '@mantine/core';
+import { string } from 'prop-types';
 const WeatherData = ({ data }) => {
   return (
     <>
@@ -25,6 +25,10 @@ const WeatherData = ({ data }) => {
       </Grid>
     </>
   );
+};
+
+WeatherData.propTypes = {
+  data: string,
 };
 
 export default WeatherData;
